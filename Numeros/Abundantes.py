@@ -11,6 +11,8 @@ for divisor in range(1, num):
         suma += divisor
 
 if suma > num:
-    print(f'El numero {num} es abundante.')
+    print(f'El numero {num} es un numero abundante.')
+elif suma < num:
+    print(f'El numero {num} es un numero deficiente.')
 else:
-    print(f'El numero {num} es deficiente.')
+    print(f'El numero {num} es un numero perfecto.')

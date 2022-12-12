@@ -12,7 +12,8 @@ verify = length%2
 while verify != 0:
     num = input('Please enter a number with a pair number of digits: ')
     while not num.isnumeric():
-        num = input('Please enter a number with a pair number of digits: ')
+        num = input ('Please enter a number with a pair number of digits: ')
+    verify = len(num)%2
 num = int(num)
 
 # Factorizar numero
@@ -24,13 +25,36 @@ for divisor in range(1, num+1):
 # Mitad de digitos y no ceros finales
 dvalidos = []
 for divisor in divisores:
-    if len(str(divisor)) == len(str(int(num/2))):
+    if len(str(divisor)) == len(str(num))/2:
         dvalidos.append(divisor)
+finald = []
 for dv in dvalidos:
-    if int(dv)%10 == 0:
-        dvalidos.remove(dv)
-    
-print (dvalidos)
+    if int(dv)%10 != 0:
+        finald.append(dv)
+
+# Digitos en el numero original
+dfinales = []
+listanum = []
+for digito in str(num):
+    listanum.append(digito)
+
+for dv in dvalidos:
+    if str(dv) in listanum:
+        dfinales.append(dv)
+
+# Multiplicacion
+product = 1
+for x in dfinales:
+    product *= x
+else: 
+    pass
+
+if product == num:
+    print (f'{num} es un numero vampiro.')
+else:
+    print(f'{num} no es un numero vampiro.')
+
+
 
 
 
