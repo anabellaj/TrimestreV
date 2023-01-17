@@ -13,6 +13,6 @@ while num >= contador:
     if suma == num:
         print(f'{num} es pentagonal.')
         break
-    if suma > num:
+    elif suma > num:
         print(f'{num} no es pentagonal.')
         break

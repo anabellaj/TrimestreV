@@ -43,6 +43,6 @@ while run == True:
     
     if max and min and num and special == True:
         print (f'{password} is a valid password.')
-        run == False
+        run = False
     else:
         continue
