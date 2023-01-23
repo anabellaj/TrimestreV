@@ -24,7 +24,7 @@ anime = {
 ],
 "Temporada 2": [
 {
-"cap": 26,
+"cap": 35,
 "name": "Un sueño profundo",
 "duration": "22:55"
 },
@@ -35,7 +35,7 @@ anime = {
 }
 ]
 },
-"Spy × Family": {
+"Spy x Family": {
 "Temporada 1":[
 {
 "cap": 4,
@@ -76,13 +76,16 @@ anime = {
 ]
 }}
 historial = []
+new_watch = {}
+count = 0
 run = ''
 print ('\nBienvenido a Anima-te-ve!')
 while run != '3':
     print('\nQue deseas realizar hoy?')
     run = input('Puedes elegir entre: \n1. Seleccionar una serie a ver\n2. Ver el historial\n3. Salir\nColoca el numero de la opcion que prefieres: ')
     if run != '1' and run != '2' and run != '3':
-        print ('\Ingreso invalido')
+        print ('\nIngreso invalido')
+        continue
 
     elif run == '1':
         # Series Disponibles
@@ -107,13 +110,35 @@ while run != '3':
         for season, cap in temporadas.items():
             for caps in cap:
                 print (caps)
-        capitulo = input('\nIndica el numero del capitulo que deseas ver:\n>>')
-        listcaps = list(caps)
+        while True:
+            try:
+                capitulo = int(input('\nIndica el numero del capitulo que deseas ver:\n>>'))
+                break
+            except:
+                print ('Por favor ingrese un capitulo valido.')
+                continue 
 
         # Informacion del capitulo
         for season, cap in temporadas.items():
-            for caps in cap:
-                if caps == capitulo:
-                    print(cap)
+            for capss in cap:
+                for key, values in capss.items():
+                    if key == 'cap':
+                        if values == capitulo:
+                            cap_key = capss
+                            print ('\nCapitulo a ver:',capss)
+                            historial.append(capss)
+                            count += 1
+                        else:
+                            print ('Capitulo no disponible.')
+        continue
+
+    elif run == '2':
+        # Imprimir historial y cantidad de capitulos
+        historial.reverse()
+        print ('\nUsted ha visto un total de', count,'capitulos.')
+        print ('Su historial de reproduccion es', historial)
+
+    elif run == '3':
+        print ('\nHasta pronto!')
 
     
