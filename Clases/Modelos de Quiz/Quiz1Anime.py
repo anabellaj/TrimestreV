@@ -119,17 +119,19 @@ while run != '3':
                 continue 
 
         # Informacion del capitulo
+        yes = 0
         for season, cap in temporadas.items():
             for capss in cap:
                 for key, values in capss.items():
                     if key == 'cap':
                         if values == capitulo:
+                            yes += 0
                             cap_key = capss
                             print ('\nCapitulo a ver:',capss)
                             historial.append(capss)
                             count += 1
-                        else:
-                            print ('Capitulo no disponible.')
+        if yes < 1:
+            print ('Capitulo no disponible')
         continue
 
     elif run == '2':
