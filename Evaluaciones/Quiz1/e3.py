@@ -40,11 +40,11 @@ while True:
                         keep += 1
                         break
             if keep == 0:
-                go = print ('\nDatabase no encontrado\nIngresa "S" para seguir o cualquier tecla para volver al menu principal:\n>>> ')
-            if go == 'S':
-                continue
-            else:
-                break
+                go = input ('\nDatabase no encontrado\nIngresa "S" para seguir o cualquier tecla para volver al menu principal:\n>>> ')
+                if go == 'S':
+                    continue
+                else:
+                    break
     # Opcion 3: Mostrar estadisticas
     elif opt == '3':    
         # Total de tokens entre todos # Dataset con menor y mayor porcentaje
