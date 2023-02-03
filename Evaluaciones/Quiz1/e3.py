@@ -45,6 +45,8 @@ while True:
                     continue
                 else:
                     break
+            else:
+                break
     # Opcion 3: Mostrar estadisticas
     elif opt == '3':    
         # Total de tokens entre todos # Dataset con menor y mayor porcentaje
