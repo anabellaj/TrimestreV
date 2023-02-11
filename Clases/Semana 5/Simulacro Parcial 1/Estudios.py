@@ -43,27 +43,27 @@ def client_data(study):
     return client
 
 def discount (client, estudios):
-    clientes_con_descuento = 0
     descuento = 0
     study_key = client['study'][0]
     if client['gender'] == 'F' and client['edad'] > 55:
-        descuento = estudios[study_key]['Precio'] *0.25
-        clientes_con_descuento += 1
+        descuento += estudios[study_key]['Precio'] *0.25
     elif client['gender'] =='M' and client['edad'] > 65:
-        descuento = estudios[study_key]['Precio'] * 0.25
-        clientes_con_descuento +=1
-    precio = estudios[study_key]['Precio'] - descuento
+        descuento += estudios[study_key]['Precio'] * 0.25
+    return descuento
+
+def monto_final(client, descuento, estudios):
+    precio = 0
+    study_key = client['study'][0]
+    precio += estudios[study_key]['Precio'] - descuento
     return precio
 
 def factura(client, estudios, precio):
-    study_key = client['study'][0]
-    estudios[study_key]['Precio'] = precio
     print ('\n---------FACTURA---------')
-    return (f"Cedula: {client['cedula']}\nEdad: {client['edad']}\nSexo: {client['gender']}\nTipo de estudio: {client['study']}\nMonto total: {estudios[study_key]['Precio']}")
+    return (f"Cedula: {client['cedula']}\nEdad: {client['edad']}\nSexo: {client['gender']}\nTipo de estudio: {client['study']}\nMonto total: {precio}")
 
 
-def final_del_dia (total, u, r ,t, monto_facturado):
-    print (f"\nEstadisticas del dia de hoy:\nClientes totales: {int(total)}\nClientes de ultrasonido: {int(u)}\nClientes de resonancia: {int(r)}\nClientes de tomografia: {int(t)}\n\nMonto total facturado: {monto_facturado}")
+def final_del_dia (total, u, r ,t, descuentos, monto_facturado):
+    print (f"\nEstadisticas del dia de hoy:\nClientes totales: {int(total)}\nClientes de ultrasonido: {int(u)}\nClientes de resonancia: {int(r)}\nClientes de tomografia: {int(t)}\n\nTotal de clientes con descuento: {int(descuentos)}\nMonto total facturado: {monto_facturado}")
 
 def main():
 
@@ -77,7 +77,8 @@ def main():
     n_clientesU = 0
     n_clientesR = 0
     n_clientesT = 0
-    monto_total = 0
+    clientes_descuento = 0
+    dinero = 0
 
     while True:
         welcome()
@@ -85,11 +86,13 @@ def main():
         study = option(estudios)
         client = client_data(study)
         clients.append(client)
-        print (clients)
-        precio = discount(client, estudios)
-        monto_total += precio
-        print (factura(client, estudios, precio))
+        descuento = discount(client, estudios)
+        monto_total = monto_final(client, descuento,estudios)
+        dinero += monto_total
+        print (factura(client, estudios, monto_total))
         study_key = client['study'][0]
+        if monto_total != estudios[study_key]['Precio']:
+            clientes_descuento += 1
         if study_key == 'U':
             n_clientes += 1
             n_clientesU += 1.
@@ -99,7 +102,7 @@ def main():
         elif study_key == 'T':
             n_clientesT += 1
             n_clientes += 1
-        if input('Presione X para terminar el dia o cualquier tecla para continuar') == 'X':
-            final_del_dia(n_clientes, n_clientesU,n_clientesR,n_clientesT, monto_total)
+        if input('Presione X para terminar el dia o cualquier tecla para continuar\n>> ').title() == 'X' :
+            final_del_dia(n_clientes, n_clientesU,n_clientesR,n_clientesT, clientes_descuento, dinero)
             break
 main()
