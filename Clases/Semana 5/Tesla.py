@@ -21,7 +21,7 @@ def client (choice):
                 raise Exception
             break
         except:
-            print('Invalid email address')
+            print('\nInvalid email address\n')
     while True:
         try:
             age = int(input('Please enter your age:\n>> '))
@@ -29,7 +29,7 @@ def client (choice):
                 raise Exception
             break
         except:
-            print('Remember to only enter integer numbers\nYou must be between 18 and 100 years old to purchase a car')
+            print('\nRemember to only enter integer numbers\nYou must be between 18 and 100 years old to purchase a car')
     autopilot = input('Do you wish for your car to have AutoPilot?\nEnter "yes" or "no"\n>> ').upper()
     while autopilot not in ['YES', 'NO']:
         autopilot = input('\nERROR - Invalid Option\nDo you wish for your car to have AutoPilot?\nEnter "yes" or "no"\n>> ').upper()
@@ -64,11 +64,35 @@ def filter (cars, facturas):
             break
         except:
             print('ERROR - Invalid option')
+    print(f'\nRECEIPTS OF MODEL {filter}')
+    find = False
     for factura in facturas:
-        if factura ['Model'] == filter:
+        if factura ['Model'] == filter:            
             for k,v in  factura.items():
                 print (k, '->', v)
-
+                find = True
+    if find == False:
+        print(f'There are no receipts corresponding to the model {filter}')
+                
+def average(facturas):
+    averageX = 0
+    averageS = 0
+    average3 = 0
+    averageY =0
+    averageCyber =0
+    for facturas in facturas:
+        if facturas['Model'] == 'X':
+            averageX +=1
+        elif facturas['Model'] == 'S':
+            averageS += 1
+        elif facturas['Model'] == '3':
+            average3 += 1
+        elif facturas['Model'] == 'Y':
+            averageY+= 1
+        elif facturas['Model'] =='Cybertruck':
+            averageCyber+= 1
+    print(f'\nTOTAL CARS SOLD FOR EACH MODEL\nModel X: {averageX}\nModel S: {averageS}\nModel 3: {average3}\nModel Y: {averageY}\nModel Cybertruck: {averageCyber}')
+    
 def main():
     cars = {
         'S': 30000,
@@ -82,12 +106,12 @@ def main():
         print('\n\t-------------------WELCOME TO TESLA-------------------')
         while True:
             try:
-                run = int(input('Press 1 to purchase a car\nPress 2 to filter receipts\nPress 3 to see the average revenue for each model\nPress 4 to show all receipts from higher to lower price\nPress 5 to exit\n>> '))
+                run = int(input('Press 1 to purchase a car\nPress 2 to filter receipts\nPress 3 to see the number of cars bought for each model\nPress 4 to show all receipts from higher to lower price\nPress 5 to exit\n>> '))
                 if run  not in range (1,6):
                     raise Exception
                 break
             except:
-                print('ERROR - Invalid Option')
+                print('\nERROR - Invalid Option\n')
         if run == 1:
             choice = choose_car(cars)
             cliente = client(choice)
@@ -95,5 +119,13 @@ def main():
             facturas.append(precios)
         elif run == 2:
             filter (cars,facturas)
-        
+        elif run == 3:
+              average(facturas)
+        elif run == 4:
+            # Ordenar una lista de diccionarios a partir de un value de cada diccionario
+            facturas.sort(key = lambda p:p ['Price'], reverse=True)
+            print(facturas)
+        elif run == 5:
+            print('Hasta pronto!')
+            break      
 main()
