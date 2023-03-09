@@ -1,0 +1,25 @@
+UML = Unified Modeling Language
+Lenguaje que permite modelar, construir y documentar los elementos que forman un software orientado a objetos.
+Uno de sus objetivos principales es posibilitar el intercambio de modelos entre las distintas herramientas CASE orientadas
+a objetos del mercado. Nos permite definir una notacion y semantica comun. 
+
+DIAGRAMA DE CLASES
+Describe la estructura estatica del sistema, mostrando sus clases y las relaciones entre estas.
+Una clase es la definicion de un conjunto de objetos con caracteristicas similares. 
+Cada clase tiene atributos (caracteristicas) y metodos (funciones)
+
+En los diagramas, la herencia se simboliza con una flecha blanca que apunta hacia la Clase Padre.
+Las asociaciones simples se simbolizan con una flecha. 
+
+TIPOS DE RELACIONES 
+    Asociacion ternaria: conecta a 3 clases (se simboliza con un rombo en donde se unen las 3 clases)
+    Asociacion Or: es una restriccion en 2 o mas asociaciones y especifica que objetos de una clase pueden participar a lo sumo en una de las asociaciones.
+    Agregacion: Es una forma especial de asociacion. Relacion "parte de" o "contiene". Parte de un TODO con un rombo blanco y va hacia su componente.
+            Puede ser transitiva: A es parte de B y B es parte de C, entonces A es parte de C.
+            Puede ser antisimetrica: A es parte de B, entonces B no es parte de A.
+    Composicion: Se simboliza con un rombo negro y depende totalmente del "todo".
+    Generalizacion: Relación “Es un”. Es la relación entre una clase más general (superclase) y clases más específicas (subclases) de esa misma clase. Solo se utiliza en clases, no en instancias.
+    Herencia: Es el mecanismo que implementa la relación de generalización para obtener atributos y operaciones.
+
+La cardinalidad es distinta para cada clase, y es importante colocarla en el diagrama de clases. 
+
